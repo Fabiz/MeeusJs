@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"></meta>
+	<meta name="viewport" content="width=device-width"></meta>
+	<title>Examples Tests</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="./lib/Astro.js"></script>
+	<script src="./lib/Astro.Coord.js"></script>
+	<script src="./lib/Astro.DeltaT.js"></script>
+	<script src="./lib/Astro.Globe.js"></script>
+	<script src="./lib/Astro.Interp.js"></script>
+	<script src="./lib/Astro.JulianDay.js"></script>
+	<script src="./lib/Astro.Math.js"></script>
+	<script src="./lib/Astro.Moon.js"></script>
+	<script src="./lib/Astro.MoonIllum.js"></script>
+	<script src="./lib/Astro.Nutation.js"></script>
+	<script src="./lib/Astro.Parallax.js"></script>
+	<script src="./lib/Astro.Refraction.js"></script>
+	<script src="./lib/Astro.Rise.js"></script>
+	<script src="./lib/Astro.Sidereal.js"></script>
+	<script src="./lib/Astro.Solar.js"></script> 
+</head>
+
+<body>
+	<h1>MeeusJs</h1>
+	<div>Observer: Zurich, lat: 47.3957, lng:8.4867<div> 
+	<div id="date"></div>
+	
+	<h2>Sun position</h2>
+	<div id="sunpos"></div>
+	
+	<h2>Moon position</h2>
+	<div id="moonpos"></div>
+	
+	<h2>Moon illumination</h2>
+	<div id="moonillum"></div>
+	
+	<h2>Sun times</h2>
+	<div id="suntimes"></div>
+	
+	<h2>Moon times</h2>
+	<div id="moontimes"></div>
+	
+	
+	<script>	
+		function update() {
+			var date = new Date(); // now
+			var jdo = new A.JulianDay(date); 
+			var coord = A.EclCoord.fromWgs84(47.3957, 8.4867, 440);
+		
+			var suntp = A.Solar.topocentricPosition(jdo, coord, true);
+			var moontp = A.Moon.topocentricPosition(jdo, coord, true);
+			
+			var i = A.MoonIllum.phaseAngleEq2(moontp.eq, suntp.eq);
+			var k = A.MoonIllum.illuminated(i);
+			
+			$('#date').text(date.toString() + ", jd:" + jdo.jd);
+			$('#sunpos').text(suntp.hz.toString());
+			$('#moonpos').text(moontp.hz.toString() + ", dist:" + moontp.delta);		
+			
+			$('#moonillum').text("phase:" + i + ", illuminated:" + k);		
+		}
+		window.setInterval(update, 1000); // refresh every second
+	</script>
+	
+	
+	<script>
+	
+		var date = new Date(); // now
+		var jdo = new A.JulianDay(date); 
+		var coord = A.EclCoord.fromWgs84(47.3957, 8.4867, 440);
+	
+		var suntimes = A.Solar.times(jdo, coord);
+		var moontimes = A.Moon.times(jdo, coord);
+		
+		$('#suntimes').text("rise:" + A.Coord.secondsToHMSStr(suntimes.rise) + 
+						  ", transit:" + A.Coord.secondsToHMSStr(suntimes.transit) + 
+						  ", set:" +  A.Coord.secondsToHMSStr(suntimes.set));
+						  
+		$('#moontimes').text("rise:" + A.Coord.secondsToHMSStr(moontimes.rise) + 
+						  ", transit:" + A.Coord.secondsToHMSStr(moontimes.transit) + 
+						  ", set:" +  A.Coord.secondsToHMSStr(moontimes.set));
+	</script>
+
+</body>
+</html>
+
+

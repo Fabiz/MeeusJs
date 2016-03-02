@@ -1,0 +1,50 @@
+{
+  "name": "meeusjs",
+  "version": "1.0.0",
+  "description": "Implementation of the Astronomical Algorithms of Jean Meeus in Javascript ",
+  "dependencies": {},
+  "devDependencies": {
+    "closurecompiler": "~1",
+    "eslint": "^1.10.3",
+    "jsdoc": "^3.4.0"
+  },
+  "eslintConfig": {
+    "rules": {
+      "indent": 0,
+      "array-bracket-spacing": 0,
+      "strict": 0,
+      "brace-style": 0
+    }
+  },
+  "scripts": {
+    "lint": "eslint lib/*.js",
+    "pretest": "npm run lint",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "jsdoc": "./node_modules/.bin/jsdoc lib/ package.json"
+  },
+  "main": "lib/Astro.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabiz/Meeus.git"
+  },
+  "keywords": [
+    "meeus",
+    "solar",
+    "lunar",
+    "eclipse",
+    "astronomy",
+    "astronomical",
+    "algorithms",
+    "javascript",
+    "julianday",
+    "sunrise",
+    "sunset",
+    "moon"
+  ],
+  "author": "Fabio Soldati (http://www.peakfinder.org)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fabiz/Meeus/issues"
+  },
+  "homepage": "https://github.com/Fabiz/Meeus#readme"
+}
