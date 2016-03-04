@@ -85,13 +85,21 @@ console.log("rise:" + A.Coord.secondsToHMSStr(times.rise) +
 var suneq = A.Solar.apparentTopocentric(jdo, coord);
 var i = A.MoonIllum.phaseAngleEq2(tp.eq, suneq);
 var k = A.MoonIllum.illuminated(i);
+var chi =  A.MoonIllum.positionAngle(moontp.eq, suneq);
 
-console.log("phase:" + i + ", illuminated:" + k);		
+console.log("phase:" + i + ", illuminated:" + k + ", angle:" + chi);		
 ```
 
 
 
 ## Changelog
+
+#### 1.0.1 &mdash; Mar 04, 2016
+
+- Fixed bug of MoonIllum
+- Added approxTransit to Moon and Solar
+- Added toDate method the JulianDay
+
 
 #### 1.0.0 &mdash; Mar 02, 2016
 

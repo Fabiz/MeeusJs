@@ -5,7 +5,7 @@ rm -f *.min.js 2> /dev/null
 rm -f *.min.js.jgz 2> /dev/null
 
 
-version=1.0.0
+version=1.0.1
 
 echo 'build js'
 java -jar ./node_modules/closurecompiler/compiler/compiler.jar \
@@ -26,7 +26,4 @@ java -jar ./node_modules/closurecompiler/compiler/compiler.jar \
 	--js ./lib/Astro.Sidereal.js \
 	--js ./lib/Astro.Solar.js \
 	--js_output_file meuusjs.${version}.min.js
-
-
-gzip -9c meuus.${version}.min.js > meuusjs.${version}.min.js.jgz
 

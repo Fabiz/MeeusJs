@@ -300,7 +300,7 @@ QUnit.test( "astro.moon parallactic angle", function( assert ) {
 	var jd = 2457439.5; // A.JulianDay.dateToJD(new Date(Date.UTC(2016, 2-1, 21, 0, 0, 0)));
 	var hz = A.Moon.topocentricPosition(new A.JulianDay(jd), eclCoord);	
 	
-	assert.close(hz.q*180/Math.PI, 23.8, 0.5);  // TODO: Recheck this value 
+	assert.close(hz.q*180/Math.PI, 27.5, 0.1);  
 });
 
 

@@ -51,18 +51,26 @@ QUnit.test( "astro.julianday calendarJulianToJD", function( assert ) {
 });
 
 QUnit.test( "astro.julianday dateToJD", function( assert ) {
-	assert.equal(A.JulianDay.dateToJD(new Date(Date.UTC(1999, 1-1, 1))), 2451179.5);
 	
-	assert.equal(A.JulianDay.dateToJD(new Date(Date.UTC(1987, 4-1, 10, 19, 21, 0))), 2446896.30625); // see page 89
+	function test(date, jd) {
+		var jdo = new A.JulianDay(date); // result is  2446896.30625
+		assert.close(jdo.jd, jd, 0.00001);
+		assert.equal(jdo.toDate().getTime(), date.getTime());
+	}
 	
-	assert.equal(A.JulianDay.dateToJD(new Date(Date.UTC(1987, 4-1, 10, 19, 21, 0))), 2446896.30625); // see page 89
 	
-	assert.close(A.JulianDay.dateToJD(new Date(Date.UTC(2016, 2-1, 18, 15-1, 50, 3))),  2457437.1180903);
+	test(new Date(Date.UTC(1999, 1-1, 1)), 2451179.5);
 	
-	assert.close(A.JulianDay.dateToJD(new Date(Date.UTC(1957, 10-1, 4, 19, 44, 26))),  2436116.322523);  // Example 7.a
+	test(new Date(Date.UTC(1987, 4-1, 10, 19, 21, 0)), 2446896.30625); // see page 89
 	
-	assert.close(A.JulianDay.dateToJD(new Date(Date.UTC(333, 1-1, 27, 12, 0, 0))),  1842713.0);  // Example 7.a
-	assert.close(A.JulianDay.dateToJD(new Date(Date.UTC(-2015, 2-1, 18, 12, 0, 0))),  985127.9999996);  // From calsky.com
+	test(new Date(Date.UTC(1987, 4-1, 10, 19, 21, 0)), 2446896.30625); // see page 89
+	
+	test(new Date(Date.UTC(2016, 2-1, 18, 15-1, 50, 3)),  2457437.1180903);
+	
+	test(new Date(Date.UTC(1957, 10-1, 4, 19, 44, 26)),  2436116.322523);  // Example 7.a
+	
+	test(new Date(Date.UTC(333, 1-1, 27, 12, 0, 0)),  1842713.0);  // Example 7.a
+	test(new Date(Date.UTC(-2015, 2-1, 18, 12, 0, 0)),  985127.9999996);  // From calsky.com
 
 	
 });
@@ -115,4 +123,16 @@ QUnit.test( "astro.julianday startOfDay", function( assert ) {
 		
 });
 
+QUnit.test( "astro.julianday jdToDate", function( assert ) {
+
+	function test(date, jd) {
+		var jdo = new A.JulianDay(date); // result is  2446896.30625
+		assert.close(jdo.startOfDay().jd, jd);
+	}
+	
+	test(new Date(Date.UTC(1987, 4-1, 10, 19, 21, 0)), 2446895.5); // result is  2446896.30625
+	test(new Date(Date.UTC(1987, 4-1, 10, 0, 0, 0)), 2446895.5); // result is  2446896.30625
+	test(new Date(Date.UTC(1987, 4-1, 10, 19, 23, 59, 59)), 2446895.5); // result is  2446896.30625
+		
+});
 
