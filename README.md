@@ -28,6 +28,7 @@ Currently the following chapters are implemented:
 |22. Nutation and the Obliquity of the Ecliptic        | A.Nutation    |
 |23. Apparent Place of a Star                          | A.Nutation    |
 |25. Solar Coordinates                                 | A.Solar       |
+|27. Equinoxes and Solstices                           | A.Solstice    |
 |40. Correction for Parallax                           | A.Parallax    |
 |47. Position of the Moon                              | A.Moon        |
 |48. Illuminated Fraction of the Moon's Disk           | A.MoonIllum   |
@@ -93,6 +94,10 @@ console.log("phase:" + i + ", illuminated:" + k + ", angle:" + chi);
 
 
 ## Changelog
+
+#### 1.0.2 &mdash; Mar 18, 2016
+
+- Added solistice
 
 #### 1.0.1 &mdash; Mar 04, 2016
 

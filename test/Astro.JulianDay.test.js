@@ -110,6 +110,15 @@ QUnit.test( "astro.julianday deltaT", function( assert ) {
 	assert.close(jd.deltaT, 47.6, 0.1);
 });
 
+QUnit.test( "astro.julianday jdFromJDE", function( assert ) {
+	
+	var jde = 2451179.5; // 1999/1/1
+	var jd = A.JulianDay.jdFromJDE(jde);
+	
+	assert.close(jd.jd, jde, 0.1);
+});
+
+
 QUnit.test( "astro.julianday startOfDay", function( assert ) {
 
 	function test(date, jd) {
