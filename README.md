@@ -7,7 +7,7 @@ The library can be used to calculate sun and moon positions and their phases (ri
 
 The library is about 20kb (minimized) and licensed under MIT. It includes various unit tests against the data of http://ssd.jpl.nasa.gov/horizons.cgi.
 
-The sourcecode is written by [Fabio Soldati](http://www.peakfinder.org/about) ([@fabiz](https://github.com/fabiz)) form http://www.peakfinder.org.
+The sourcecode is written by [Fabio Soldati](http://www.peakfinder.org/about) ([@fabiz](https://github.com/fabiz)) from http://www.peakfinder.org.
 
 
 ## Package contents
@@ -94,6 +94,11 @@ console.log("phase:" + i + ", illuminated:" + k + ", angle:" + chi);
 
 
 ## Changelog
+
+#### 1.0.3 &mdash; Jan 18, 2017
+
+- Fixed bug on A.JulianDay.jdToDate
+
 
 #### 1.0.2 &mdash; Mar 18, 2016
 

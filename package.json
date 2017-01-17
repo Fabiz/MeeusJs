@@ -1,6 +1,6 @@
 {
   "name": "meeusjs",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Implementation of the Astronomical Algorithms of Jean Meeus in Javascript ",
   "dependencies": {},
   "devDependencies": {

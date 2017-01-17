@@ -5,10 +5,10 @@ rm -f *.min.js 2> /dev/null
 rm -f *.min.js.jgz 2> /dev/null
 
 
-version=1.0.2
+version=1.0.3
 
 echo 'build js'
-java -jar ./node_modules/closurecompiler/compiler/compiler.jar \
+java -jar ./node_modules/closurecompiler/compiler/closure-compiler-v20161201.jar \
 	--compilation_level SIMPLE_OPTIMIZATIONS \
 	--js ./lib/Astro.js \
 	--js ./lib/Astro.Coord.js \
