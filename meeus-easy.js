@@ -1,4 +1,4 @@
-// gets the moon position and times
+// gets the moon position and times in UTC
 function mooncalcMeeus(myDateJS, lat, lon, height) {
   var jdo = new A.JulianDay(myDateJS); 
   var coord = A.EclCoord.fromWgs84(lat, lon, height);
@@ -14,16 +14,15 @@ function mooncalcMeeus(myDateJS, lat, lon, height) {
   // gets the rise, transit and set time of the moon
   var times = A.Moon.times(jdo, coord);
 
+
   // print moon phase and illuminated
   var suneq = A.Solar.apparentTopocentric(jdo, coord);
   var i = A.MoonIllum.phaseAngleEq2(tp.eq, suneq);
   var k = A.MoonIllum.illuminated(i);
   var chi =  A.MoonIllum.positionAngle(tp.eq, suneq);
 
-  if (azRad < 0) {
-     azRad = Math.PI + azRad;
-     azDeg = 180.0 + azDeg;
-  }
+   azRad = azRad  +  Math.PI ;
+   azDeg = azDeg + 180;
 
   return {
     moonAzimuthDegrees : azDeg,
@@ -32,19 +31,20 @@ function mooncalcMeeus(myDateJS, lat, lon, height) {
     moonAltitudeRefractionDegrees : altDeg,
     moonAltitudeRefractionRad : altRad,
     moonIllumFractionDetailPercentage : k,
-    moonPhase : i,
-    rise : A.Coord.secondsToHMSStr(times.rise),
-    riseJS : new Date(myDateJS.getFullYear() + "-" + (myDateJS.getMonth()+1) +  "-" +  myDateJS.getDate() + " " +  A.Coord.secondsToHMSStr(times.rise)),
-    transit : A.Coord.secondsToHMSStr(times.transit) ,
-    transitJS : new Date(myDateJS.getFullYear() + "-" + (myDateJS.getMonth()+1) + "-" +myDateJS.getDate() + " " +  A.Coord.secondsToHMSStr(times.transit)),
-    set: A.Coord.secondsToHMSStr(times.set),
-    setJS : new Date(myDateJS.getFullYear() + "-" + (myDateJS.getMonth()+1) + "-" +myDateJS.getDate() + " " + A.Coord.secondsToHMSStr(times.set)),
+   moonPhase : i,
+    moonDistance : distKm,
+    rise : A.Coord.secondsToHMSStr(times.rise) + "Z",
+    riseJS : new Date(myDateJS.getUTCFullYear() + "-" + (myDateJS.getUTCMonth()+1) +  "-" +  myDateJS.getUTCDate() + " " +  A.Coord.secondsToHMSStr(times.rise) + "Z"),
+    transit : A.Coord.secondsToHMSStr(times.transit) + "Z" ,
+    transitJS : new Date(myDateJS.getUTCFullYear() + "-" + (myDateJS.getUTCMonth()+1) + "-" +myDateJS.getUTCDate() + " " +  A.Coord.secondsToHMSStr(times.transit) + "Z"),
+    set: A.Coord.secondsToHMSStr(times.set) + "Z",
+    setJS : new Date(myDateJS.getUTCFullYear() + "-" + (myDateJS.getUTCMonth()+1) + "-" +myDateJS.getUTCDate() + " " + A.Coord.secondsToHMSStr(times.set) + "Z"),
 
   }
 }
 
 function suncalcMeeus(myDateJS, lat, lon, height) {
-// gets sun position and times 
+// gets sun position and times in UTC
   var jdo = new A.JulianDay(myDateJS); 
   var coord = A.EclCoord.fromWgs84(lat, lon, height);
 
@@ -56,24 +56,26 @@ function suncalcMeeus(myDateJS, lat, lon, height) {
   var azDeg = azRad * 180 / Math.PI;
   var distKm =  tp.delta; // debug
 
-  if (azRad < 0) {
-     azRad = Math.PI + azRad;
-     azDeg = 180.0 + azDeg;
-  }
+   azRad = azRad  +  Math.PI ;
+   azDeg = azDeg + 180;
+
+
   // gets the rise, transit and set time of the sun
   var times = A.Solar.times(jdo, coord);
+
 
   return {
     sunAzimuthRad : azRad,
     sunAltitudeRad : altRad,
     sunAzimuthDegrees : azDeg,
     sunAltitudeDegrees : altDeg,
-    rise : A.Coord.secondsToHMSStr(times.rise),
-    riseJS : new Date(myDateJS.getFullYear() + "-" + (myDateJS.getMonth()+1) + "-" + myDateJS.getDate() + " "  + A.Coord.secondsToHMSStr(times.rise)),
-    transit : A.Coord.secondsToHMSStr(times.transit) ,
-    transitJS : new Date(myDateJS.getFullYear() + "-" + (myDateJS.getMonth()+1) + "-" + myDateJS.getDate() + " "  + A.Coord.secondsToHMSStr(times.transit)),
-    set: A.Coord.secondsToHMSStr(times.set),
-    setJS : new Date(myDateJS.getFullYear() + "-" + (myDateJS.getMonth()+1) + "-" + myDateJS.getDate() + " "  + A.Coord.secondsToHMSStr(times.set)),
+    sunDistance : distKm,
+    rise : A.Coord.secondsToHMSStr(times.rise) + "Z",
+    riseJS : new Date(myDateJS.getUTCFullYear() + "-" + (myDateJS.getUTCMonth()+1) + "-" + myDateJS.getUTCDate() + " "  + A.Coord.secondsToHMSStr(times.rise) + "Z"),
+    transit : A.Coord.secondsToHMSStr(times.transit) + "Z" ,
+    transitJS : new Date(myDateJS.getUTCFullYear() + "-" + (myDateJS.getUTCMonth()+1) + "-" + myDateJS.getUTCDate() + " "  + A.Coord.secondsToHMSStr(times.transit) + "Z"),
+    set: A.Coord.secondsToHMSStr(times.set) + "Z",
+    setJS : new Date(myDateJS.getUTCFullYear() + "-" + (myDateJS.getUTCMonth()+1) + "-" + myDateJS.getUTCDate() + " "  + A.Coord.secondsToHMSStr(times.set) + "Z"),
   }
 }
 
@@ -100,5 +102,3 @@ function getMoonTimesMeeus(myDateJS, lat, lon, height) {
     setJS : temp.setJS,
   }
 }
-
-
